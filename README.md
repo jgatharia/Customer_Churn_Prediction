@@ -54,12 +54,22 @@ In this project we installed the python, pandas, numpy and scikit learn librarie
 We identified that we data we have was collected from 3 geographical areas. Area code 415', '408' and '510'. 
 The area code with the highest churn number is area code 415 followed by 510 and lastly 408. 
 See the visualization:
+![alt text](image-1.png)
 ![Customer Distribution by Area Code and Churn](./image/Customer Distribution by Area Code and Churn.png)
 
 #### Finding 2: Data Type Conversion
 We identified that the 'area code' column, originally an integer, represents categorical labels rather than numerical values. To avoid misinterpretation in our predictive model, we converted this column to a string data type. This ensures the model treats 'area code' correctly as a categorical feature, preserving the integrity of our predictions.
 
 #### Finding 3: Multicollinearity
-Our analysis revealed high correlations between several columns, indicating multicollinearity. This can obscure the unique impact of each variable and potentially lead to overfitting, particularly in models like Logistic Regression that are sensitive to multicollinearity. To address this, we plan to implement techniques such as regularization, ensuring our models remain reliable and interpretable.
+Our analysis revealed high correlations between several columns, indicating multicollinearity. For instance 'total day charge', 'total day minutes', 'total eve minutes', 'total eve charge', 'total night charge', 'total night minutes', 'total int minutes' and 'total int charge' have perfect multicollinearity. This can obscure the unique impact of each variable and potentially lead to overfitting, particularly in models like Logistic Regression that are sensitive to multicollinearity. To address this, we plan to implement techniques such as regularization, ensuring our models remain reliable and interpretable.
 
-#### Finding 4: 
+![alt text](image.png)
+
+#### Finding 4: Outliers
+We observe the presence of a significant number of outliers in our dataset. Outliers have the potential to impact our modeling process. However, it is important to note that, in this case, these outliers are not anomalies that should be removed. Instead, they are a noteworthy aspect of our dataset that we should be aware of during our modeling process. These outliers may carry valuable information or insights that could be relevant to our analysis therefore it is essential to consider and account for them when developing our models and interpreting the results. Understanding the nature and impact of these outliers is a critical part of ensuring the robustness and accuracy of our data analysis.
+
+Adding regularization to our model can help reduce the impact of outliers by penalizing extreme parameter values, making the model more generalizable and robust
+
+![alt text](image-2.png)
+
+### Data Preprocessing
