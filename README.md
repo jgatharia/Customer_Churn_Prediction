@@ -1,4 +1,4 @@
-# Phase_3_Project
+# Phase 3 Project
 ## SyriaTel Customer Churn Prediction
 ### Project Overview
 ## 1. Business Problem
