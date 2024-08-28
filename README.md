@@ -20,7 +20,7 @@ Develop a predictive model that accurately identifies customers who are at risk 
 Build a classification model that predicts whether a customer will churn or not within the next three months.
 
 ## 2. Data Understanding
-This project utilizes the SyriaTel dataset, which was downloaded from Kaggle. The data is stored in the file named SyriaTel_Customer_Churn.csv. As part of understanding our data, we will assess it for class imbalance and identify any other potential limitations. These issues will be addressed as we proceed to analyze and prepare the data for modeling.
+This project utilizes the SyriaTel dataset, which was downloaded from Kaggle and contains about 3333 records in terms of the rows and 21 columns in totality. The data is stored in the file named SyriaTel_Customer_Churn.csv. As part of understanding our data, we noted that our dataset does not contain any missing values but the target variable is imbalanced. Majority of the variable is the no churn while the minority is the churn rate. We also considered building a model having addressed this class imbalance issue with the SMOTE technique. From our data we also noted that the column 'phone number' is the unique identifier as it contained 3333 unique values.
 
 See below columns and what they represent:
 * State: The geographical location of the customer.
@@ -43,8 +43,23 @@ See below columns and what they represent:
 * Total Intl Calls: Total international calls made.
 * Total Intl Charge: Total charge incured on the international plan.
 * Customer Service Calls: How many calls the customer made for support to SyriaTel.
-* Churn: Target variable indicating whether the customer has churned or not that is 1 or 0 respectively.
+* Churn: Target variable indicating whether the customer has churned (True) or not churn (False) respectively.
 
 All the other features are potential contributing factors to churn which our project will focus on to eventually tell which features are more significant than the others. 
 
-### Data Findings:
+### EDA Data Analysis Findings:
+In this project we installed the python, pandas, numpy and scikit learn libraries.
+
+#### Finding 1: Data Georgaphical Distribution
+We identified that we data we have was collected from 3 geographical areas. Area code 415', '408' and '510'. 
+The area code with the highest churn number is area code 415 followed by 510 and lastly 408. 
+See the visualization:
+![alt text](image.png)
+
+#### Finding 2: Data Type Conversion
+We identified that the 'area code' column, originally an integer, represents categorical labels rather than numerical values. To avoid misinterpretation in our predictive model, we converted this column to a string data type. This ensures the model treats 'area code' correctly as a categorical feature, preserving the integrity of our predictions.
+
+#### Finding 3: Multicollinearity
+Our analysis revealed high correlations between several columns, indicating multicollinearity. This can obscure the unique impact of each variable and potentially lead to overfitting, particularly in models like Logistic Regression that are sensitive to multicollinearity. To address this, we plan to implement techniques such as regularization, ensuring our models remain reliable and interpretable.
+
+#### Finding 4: 
