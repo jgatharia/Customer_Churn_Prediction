@@ -56,8 +56,6 @@ The area code with the highest churn number is area code 415 followed by 510 and
 See the visualization:
 ![images](image-1.png)
 
-![alt text]images/image-1.png
-
 #### Finding 2: Data Type Conversion
 We identified that the 'area code' column, originally an integer, represents categorical labels rather than numerical values. To avoid misinterpretation in our predictive model, we converted this column to a string data type. This ensures the model treats 'area code' correctly as a categorical feature, preserving the integrity of our predictions.
 
@@ -74,3 +72,17 @@ Adding regularization to our model can help reduce the impact of outliers by pen
 ![alt text](image-2.png)
 
 ### Data Preprocessing
+1. Data Splitting: 
+We performed this step before preprocessing in order to prevent data leakage. This ensures that the test data remains completely unseen until the evaluation phase. Use the random state of 42 and a test size of 20%. 
+2. Handling Missing Data:
+We did not have missing data therefore there isnt much to handle here in this preprocessing step.
+3. Encoding Categorical Variables:
+The 2 features 'international plan' and 'voice mail plan' and  that are in the datatype object. We shall proceed to convert this variables to dummy ohe using the OneHotEncoder from sklearn.
+4. Data Normalization using MinMaxScaler:
+MinMaxScaler with default parameters will create a maximum value of 1 and a minimum value of 0. This will work well with our binary one-hot encoded data.
+5. Concatenating the Normalized and OheHotEncoded Train and Test Data:
+This is done to create a final dataframe with the ohehotencoded and normalized set for both the trained and tested sets.
+6. Feature Selection Using Domain Knowledge:
+We proceeded to select our features using domain knowledge. From our dataset we eliminated the columns: area code, phone number and state as we did not find this columns relevant in our business problem.
+
+### Modeling
