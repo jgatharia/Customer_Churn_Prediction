@@ -55,7 +55,6 @@ We identified that we data we have was collected from 3 geographical areas. Area
 The area code with the highest churn number is area code 415 followed by 510 and lastly 408. 
 See the visualization:
 
-![images](image-1.png)
 
 #### Finding 2: Data Type Conversion
 We identified that the 'area code' column, originally an integer, represents categorical labels rather than numerical values. To avoid misinterpretation in our predictive model, we converted this column to a string data type. This ensures the model treats 'area code' correctly as a categorical feature, preserving the integrity of our predictions.
@@ -63,14 +62,12 @@ We identified that the 'area code' column, originally an integer, represents cat
 #### Finding 3: Multicollinearity
 Our analysis revealed high correlations between several columns, indicating multicollinearity. For instance 'total day charge', 'total day minutes', 'total eve minutes', 'total eve charge', 'total night charge', 'total night minutes', 'total int minutes' and 'total int charge' have perfect multicollinearity. This can obscure the unique impact of each variable and potentially lead to overfitting, particularly in models like Logistic Regression that are sensitive to multicollinearity. To address this, we plan to implement techniques such as regularization, ensuring our models remain reliable and interpretable.
 
-![alt text](image.png)
 
 #### Finding 4: Outliers
 We observe the presence of a significant number of outliers in our dataset. Outliers have the potential to impact our modeling process. However, it is important to note that, in this case, these outliers are not anomalies that should be removed. Instead, they are a noteworthy aspect of our dataset that we should be aware of during our modeling process. These outliers may carry valuable information or insights that could be relevant to our analysis therefore it is essential to consider and account for them when developing our models and interpreting the results. Understanding the nature and impact of these outliers is a critical part of ensuring the robustness and accuracy of our data analysis.
 
 Adding regularization to our model can help reduce the impact of outliers by penalizing extreme parameter values, making the model more generalizable and robust
 
-![alt text](image-2.png)
 
 #### Finding 5: Class Imbalance
 From the target variable above we saw that the churn class value count was 483 whereas the no churn count was 2850. We note a significant class imbalance here where the churn is the minority class and not churn is the majority class. This is common in churn datasets.
@@ -112,14 +109,14 @@ The Decision tree baseline model was trained using the Decision Tree Classifier,
 
 We second Decision tree iterative model had manually tuned step by step parameters that is max_features, max_depth, min_sample_splits, min_sample_leafs. We used the manually obtained optimum values of each feature to train our model.
 
-Our last decision tree model was modified by grid search technique. We obtained the best parameters: {'criterion': 'gini', 'max_depth': 10, 'min_samples_leaf': 4, 'min_samples_split': 10}. This was used to train our 3rd iterative model.
+Our last decision tree model was modified by grid search technique. We obtained the best parameters: criterion: gini, max_depth: 10, min_samples_leaf: 4, min_samples_split: 10. This was used to train our 3rd iterative model.
 
 ## 4 . Evaluation
 The logistic regression baseline model struggles significantly with predicting customer churn, especially due to the class imbalance. Although it achieves high overall accuracy, this is largely due to correctly predicting non-churners, which doesn't align with the business goal of accurately identifying churners. The low recall and F1 scores indicate that the model is not effectively capturing the customers at risk of leaving, which is critical for implementing successful retention strategies. Improving the model’s performance on the minority class (churners) is essential for it to be truly valuable in a churn prediction context.
 
 Logistic regression iterative model 2 is likely the better choice for predicting customer churn. Its higher recall ensures that more potential churners are identified, which is crucial in churn prevention strategies. While it has a lower precision, the trade-off is justified by the significant gain in recall and F1 score, making Model 2 more reliable for targeting retention efforts and ultimately reducing customer attrition.
 
-We also cross validated the baseline and iterative Baseline Model Performance:
+We also cross validated the baseline and iterative model Performance:
 The baseline model achieved a cross-validation score of 0.861215. This score represents the model's ability to generalize to unseen data based on the training data it was given. The iterative model after some hyperparameter tuning and SMOTE achieved a slightly higher cross-validation score of 0.861590.
 
 The decision tree baseline model performs very well for the "no churn" class, which is expected given the class imbalance. It achieves high precision, recall, and F1-score for this class, making it reliable for predicting customers who are likely to stay. It is weaker for the "churn" class, with lower precision, recall, and F1-score. However, it still identifies a reasonable portion of churners, which is crucial for proactive measures.
@@ -128,34 +125,34 @@ We got an even worse AUC when training the model using the identified feature po
 
 The third decision tree iterative model showed considerable improvements over the baseline, with higher accuracy, better precision and recall, improved F1-scores, a more balanced performance across classes, and a stronger ability to distinguish between churn and no churn, as evidenced by the higher ROC AUC score. These enhancements suggest a more effective model for predicting customer churn.
 
-#### Model of Choice
+### Model of Choice
 From the above models we have seen that the best performing model is the **Decision Tree Tuned by Grid Search technique**.
 The model has high accuracy and strong performance metrics for both churn and non-churn classes. The high recall for non-churn (False) indicates that the model effectively identifies customers who are likely to stay. The precision for churn (True) shows the model's effectiveness in identifying actual churners among the predicted churn cases. This balanced performance makes it a robust model for business applications where both accurate churn and non-churn predictions are crucial. The logistic regression iterative model has higher recall, making it better at catching more churners, but the much lower precision means it also predicts churn for many who won't actually churn, potentially wasting resources.
 
 In our case where the cost of missing a churner is significant but precision also matters for resource allocation, the decision tree model is the better choice. It is therefore likely more suitable for making business decisions related to customer retention and marketing strategies.
 
-#### Probable Limitations In Production
+### Probable Limitations In Production
 While our model might show high precision and recall for churners on the validation set, it could miss many churners or falsely classify non-churners in the real-world scenario, reducing its effectiveness in retaining customers. This would be due to overfitting.
 
 Our recall for churners is low, the model might not effectively identify all potential churners, impacting the ability to proactively address churn and retain customers.
 
 The model may not accurately predict churners if customer behavior has evolved since the model was last trained, potentially reducing its relevance and accuracy in the current context.
 
-#### Mitigation Strategies
+### Mitigation Strategies
 Regular Monitoring and Updating: Continuously monitor the model’s performance in production. Implement regular updates and retraining to account for shifts in customer behavior and data distribution.
 
 Validation on Real-World Data: Validate the model on recent, real-world data before full-scale deployment. This helps ensure the model performs well under current conditions.
 
 Combine with Other Models: Consider using ensemble methods or combining predictions from multiple models to improve overall prediction accuracy and robustness.
 
-#### Conclusions
+## 5. Conclusions
 What is the churn current % rate: The churn rate is at 14.5% from the data shared. We noted an imbalance on the churn target variable.
 
 What features/attributes do the customers who churn have. The customers who churn do not have voice mail plans, have international plans and the risk of churn increases at the point the client makes more than 3 calls.
 
 What strategies can SyriaTel implement to increase customer retention: See recommendations provided below
 
-#### Recommendations
+## 6. Recommendations
 Customer Service Calls Investigation: Dig deeper to understand why some customers need to contact customer service frequently. This will help in finding ways to better assist them.
 
 International Plan Churn Investigation: Since some of the customers with international plans are leaving, it's essential to explore ways to retain these customers.
