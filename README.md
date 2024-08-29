@@ -56,6 +56,7 @@ The area code with the highest churn number is area code 415 followed by 510 and
 See the visualization:
 
 Images\Customer distribution by Area Code.png
+![alt text](<Images/Customer distribution by Area Code.png>)
 
 #### Finding 2: Data Type Conversion
 We identified that the 'area code' column, originally an integer, represents categorical labels rather than numerical values. To avoid misinterpretation in our predictive model, we converted this column to a string data type. This ensures the model treats 'area code' correctly as a categorical feature, preserving the integrity of our predictions.
