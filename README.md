@@ -2,11 +2,11 @@
 ## SyriaTel Customer Churn Prediction
 ### Project Overview
 ## 1. Business Problem
-Customer retention is at the heart of every thriving Telecom company. Managing and reducing customer churn is essential for maintaining revenue, profitability and market share. By focusing on churn reduction, telecom companies can enhance customer satisfaction, increase the lifetime value of their customers, and secure a stronger position in the competitive market. SyriaTelecommunication is well aware of the common marketplace comment that "it is cheaper to retain a converted customer than acquire a new client. As a result, I have been tasked to build a classification model that will predict whether a customer will soon stop doing business with them. 
+Customer retention is at the heart of every thriving Telecom company. Managing and reducing customer churn is essential for maintaining revenue, profitability, and market share. By focusing on churn reduction, telecom companies can enhance customer satisfaction, increase the lifetime value of their customers and secure a stronger position in the competitive market. SyriaTelecommunication is well aware of the common marketplace comment that **"it is cheaper to retain a converted customer than acquire a new client**". As a result, I have been tasked to build a classification model that will predict whether a customer will soon stop doing business with them. 
 
 The research at hand delves into machine learning algorithms and offers recommendations tailored to the telecommunications industry. In a competitive telecom sector where customers can effortlessly switch from one provider to another, telecom companies are understandably concerned about customer retention and devising strategies to retain their clientele. By preemptively identifying customers likely to switch providers through behavioral analysis, they can devise targeted offers and services based on historical records. 
 
-The core objective of this study is to predict churn in advance and pinpoint the primary factors that may influence customers to migrate to other telecom providers. The project will explore various machine learning algorithms, including logistic regression and decision trees to develop a robust churn prediction model. Model performance will be evaluated using metrics such as accuracy, precision, recall, and AUC-ROC to ensure the best possible outcomes. This will provide the insight the board members need when making policies and procedures that will enable the business gear towards retaining the customers and continue being relevant in the marketplace.
+The core objective of this study is to predict churn in advance and pinpoint the primary factors that may influence customers to migrate to other telecom providers. The machine learning algorithms such as logistic regression and decision trees will be used to develop a robust churn prediction model. Model performance will be evaluated using metrics such as accuracy, precision, recall, and AUC-ROC to ensure the best possible outcomes. This will provide insight to the board members when making policies and procedures that will enable the business gear towards retaining the customers and continue being relevant in the marketplace.
 
 See below questions the project aims to answer:
 1. What is the churn current % rate.
@@ -14,13 +14,13 @@ See below questions the project aims to answer:
 3. What strategies can SyriaTel implement to increase customer retention.
 
 ## Business Objectives
-Develop a predictive model that accurately identifies customers who are at risk of churning (leaving the service) within the next three months, achieving an overall model accuracy of at least 85%, while maintaining a recall rate of at least 70% for the churn class
+Develop a predictive model that accurately identifies customers who are at risk of churning (leaving the service) and achieving an overall model accuracy of at least 85%, while maintaining a recall rate of at least 70% for the churn class.
 
 ## Data Mining Objective
-Build a classification model that predicts whether a customer will churn or not within the next three months.
+Build a classification model that predicts whether a customer will churn.
 
 ## 2. Data Understanding
-This project utilizes the SyriaTel dataset, which was downloaded from Kaggle and contains about 3333 records in terms of the rows and 21 columns in totality. The data is stored in the file named SyriaTel_Customer_Churn.csv. As part of understanding our data, we noted that our dataset does not contain any missing values but the target variable is imbalanced. Majority of the variable is the no churn while the minority is the churn rate. We also considered building a model having addressed this class imbalance issue with the SMOTE technique. From our data we also noted that the column 'phone number' is the unique identifier as it contained 3333 unique values.
+This project utilizes the SyriaTel dataset, which was downloaded from Kaggle. The dataset contains 3,333 records (rows) and 21 features (columns). The data is stored in the file named SyriaTel_Customer_Churn.csv. We also observed several findings from our EDA analysis that we will further discuss.
 
 See below columns and what they represent:
 * State: The geographical location of the customer.
@@ -51,11 +51,10 @@ All the other features are potential contributing factors to churn which our pro
 In this project we installed the python, pandas, numpy and scikit learn libraries.
 
 #### Finding 1: Data Geographical Distribution
-We identified that we data we have was collected from 3 geographical areas. Area code 415', '408' and '510'. 
-The area code with the highest churn number is area code 415 followed by 510 and lastly 408. 
+We identified that the data we have was collected from 3 geographical areas. Area code 415', '408' and '510'. 
+The area code with the highest churn number is area code 415 followed by 510 and lastly 408. In terms of distribution most customers are in the area code 415 as well.
 See the visualization:
 
-Images\Customer distribution by Area Code.png
 ![alt text](<Images/Customer distribution by Area Code.png>)
 
 #### Finding 2: Data Type Conversion
@@ -64,12 +63,12 @@ We identified that the 'area code' column, originally an integer, represents cat
 #### Finding 3: Multicollinearity
 Our analysis revealed high correlations between several columns, indicating multicollinearity. For instance 'total day charge', 'total day minutes', 'total eve minutes', 'total eve charge', 'total night charge', 'total night minutes', 'total int minutes' and 'total int charge' have perfect multicollinearity. This can obscure the unique impact of each variable and potentially lead to overfitting, particularly in models like Logistic Regression that are sensitive to multicollinearity. To address this, we plan to implement techniques such as regularization, ensuring our models remain reliable and interpretable.
 
+![alt text](<Images/Heatmap Feature Correlation.png>)
 
 #### Finding 4: Outliers
 We observe the presence of a significant number of outliers in our dataset. Outliers have the potential to impact our modeling process. However, it is important to note that, in this case, these outliers are not anomalies that should be removed. Instead, they are a noteworthy aspect of our dataset that we should be aware of during our modeling process. These outliers may carry valuable information or insights that could be relevant to our analysis therefore it is essential to consider and account for them when developing our models and interpreting the results. Understanding the nature and impact of these outliers is a critical part of ensuring the robustness and accuracy of our data analysis.
 
 Adding regularization to our model can help reduce the impact of outliers by penalizing extreme parameter values, making the model more generalizable and robust
-
 
 #### Finding 5: Class Imbalance
 From the target variable above we saw that the churn class value count was 483 whereas the no churn count was 2850. We note a significant class imbalance here where the churn is the minority class and not churn is the majority class. This is common in churn datasets.
@@ -78,7 +77,7 @@ From the target variable above we saw that the churn class value count was 483 w
 
 We will address class imbalance using a technique such as SMOTE before modeling to balance the 'churn' and 'not churn' classes. This should help improve overall model metrics like Precision, Recall, F1-score, and AUC-ROC. In imbalanced datasets, a model may achieve high accuracy by being biased toward the majority class, but this metric alone would be misleading and not truly reflective of the model's performance on the minority class which is what our model is meant to predict.
 
-![alt text](image.png)
+![alt text](<Images/Target Variable Distribution.png>)
 
 ### Data Preprocessing
 
@@ -100,12 +99,15 @@ We proceeded to select our features using domain knowledge. From our dataset we 
 Since this is a classification problem our first model will be  **Logistic Regression** as it has a binary target variable then followed by **Decision Trees** as it a powerful and flexible tool for classification problems, offering ease of interpretation, handling non-linear relationships, and providing automatic feature selection.
 First we train our logistic regression baseline model with the imbalanced target variables.
 As we fit our model, we also generated the confusion matrix which gave us the below results:
+![alt text](<Images/Confusion Matrix.png>)
+
 * True Positive (TP): 78 customers who were predicted to churn actually did churn.
 * False Negative (FN): 304 customers who were predicted not to churn actually did churn.
 * False Positive (FP): 63 customers who were predicted to churn actually did not churn.
 * True Negative (TN): 2221 customers who were predicted not to churn actually did not churn.
 
-Our second logistic regression iterative model was done after class imbalance using the technique SMOTE was implemented. We also employed the regularization technique and used a lower C value. The random_state of 42 was maintained. Regularization helps prevent overfitting by penalizing large coefficients in the logistic regression model. A lower C value (where C is the inverse of the regularization strength) increases regularization, pushing coefficients toward zero.
+Our second logistic regression iterative model was done after class imbalance using the technique SMOTE was implemented. We also employed the regularization technique and used a lower C value. The random_state of 42 was maintained. Regularization helps prevent overfitting by penalizing large coefficients in the logistic regression model. A lower C value (where C is the inverse of the regularization strength) increases regularization, pushing coefficients toward zero. See below the ROC AUC visualization:
+![alt text](<Images/Iterative Model 2 ROC AUC.png>)
 
 The Decision tree baseline model was trained using the Decision Tree Classifier, criterion=entropy and the same random state was maintained to ensures that the model's behavior is reproducible, and any changes in performance are due to the model's settings and not random variation.
 
@@ -150,7 +152,9 @@ Combine with Other Models: Consider using ensemble methods or combining predicti
 ## 5. Conclusions
 What is the churn current % rate: The churn rate is at 14.5% from the data shared. We noted an imbalance on the churn target variable.
 
-What features/attributes do the customers who churn have. Most customers who churn do not have voice mail plans, they do have international plans and the risk of churn increases at the point the client makes more than 3 calls. It would e prudent for the business to consider the reasons for the calls whether its service dissatisfaction.
+What features/attributes do the customers who churn have. Most customers who churn do not have voice mail plans, they do have international plans and the risk of churn increases at the point the client makes more than 3 calls. It would be prudent for the business to consider the reasons for the calls whether its service dissatisfaction.
+
+![alt text](<Images/Features Of Customer Who Churn.png>)
 
 What strategies can SyriaTel implement to increase customer retention: See recommendations provided below
 
